@@ -1,0 +1,34 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function ehAdmin() {
+      return request.auth != null
+        && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    // Documento único lido pelo site público
+    match /publicacao/{id} {
+      allow read: if true;
+      allow write: if ehAdmin();
+    }
+
+    // Dados de edição: só administradores
+    match /prestadores/{id} {
+      allow read, write: if ehAdmin();
+    }
+    match /anuncios/{id} {
+      allow read, write: if ehAdmin();
+    }
+    match /config/{id} {
+      allow read, write: if ehAdmin();
+    }
+
+    // Lista de administradores: cada um só lê o próprio registro.
+    // Novos ADMs são criados pelo console do Firebase.
+    match /admins/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow write: if false;
+    }
+  }
+}
