@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { publico } from '../lib/url';
 import setaEsquerda from '../assets/seta-esquerda.svg';
 import setaDireita from '../assets/seta-direita.svg';
 
@@ -45,7 +46,7 @@ export default function Destaques({ anuncios, onAbrir }) {
             <li key={a.id}>
               <button className="destaque" onClick={() => onAbrir(a)}>
                 <span className="destaque__imagem">
-                  <img src={a.imagemUrl} alt="" loading="lazy" />
+                  <img src={publico(a.imagemUrl)} alt="" loading="lazy" />
                 </span>
                 <span className="destaque__nome">{a.nome}</span>
               </button>

@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { semAcento } from '../lib/texto';
 import FormAnuncio from './FormAnuncio';
+import { publico } from '../lib/url';
 
 export default function ListaAnuncios({ dados, onAlterar }) {
   const [busca, setBusca] = useState('');
@@ -34,7 +35,7 @@ export default function ListaAnuncios({ dados, onAlterar }) {
           <li key={a.id}>
             <button className={`adm-anuncio ${a.ativo === false ? 'inativo' : ''}`} onClick={() => setEditando(a)}>
               <span className="adm-anuncio__img">
-                {a.imagemUrl ? <img src={a.imagemUrl} alt="" loading="lazy" /> : <em>Sem imagem</em>}
+                {a.imagemUrl ? <img src={publico(a.imagemUrl)} alt="" loading="lazy" /> : <em>Sem imagem</em>}
               </span>
               <span className="adm-anuncio__nome">{a.nome}</span>
               <span className="adm-anuncio__meta">

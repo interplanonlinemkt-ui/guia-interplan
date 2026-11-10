@@ -4,6 +4,7 @@ import {
 } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { auth, db, storage } from './fb';
+import { publico } from '../lib/url';
 
 const quem = () => auth.currentUser?.email || 'desconhecido';
 
@@ -63,7 +64,7 @@ export async function publicar({ prestadores, anuncios, config }) {
 
 /** Primeira carga: copia public/dados/rede.json para as coleções */
 export async function importarIniciais(aoProgredir) {
-  const dados = await (await fetch('/dados/rede.json')).json();
+  const dados = await (await fetch(publico('/dados/rede.json'))).json();
   const itens = [
     ...dados.anuncios.map((a) => ['anuncios', a]),
     ...dados.prestadores.map((p) => ['prestadores', p]),

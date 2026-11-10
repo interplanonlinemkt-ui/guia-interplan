@@ -1,4 +1,5 @@
 import Modal from './Modal';
+import { publico } from '../lib/url';
 import { opcoesContato } from './ContatoMenu';
 import { formatarTelefone, linkWhatsapp } from '../lib/texto';
 
@@ -15,7 +16,7 @@ export default function ModalAnuncio({ anuncio: a, prestadores, onFechar }) {
     <Modal titulo={a.nome} onFechar={onFechar} className="modal--anuncio">
       <div className="anuncio">
         <div className="anuncio__imagem">
-          <img src={a.imagemUrl} alt={`Anúncio de ${a.nome}`} />
+          <img src={publico(a.imagemUrl)} alt={`Anúncio de ${a.nome}`} />
         </div>
         <div className="anuncio__info">
           <p className="anuncio__categoria">{a.categoria}</p>

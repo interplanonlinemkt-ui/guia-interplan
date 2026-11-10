@@ -92,7 +92,7 @@ export default function Painel({ usuario }) {
           <span>Painel do Guia</span>
         </div>
         <div className="adm-topo__usuario">
-          <a href="/" target="_blank" rel="noopener noreferrer" className="adm-link">
+          <a href="#/" target="_blank" rel="noopener noreferrer" className="adm-link">
             Ver site ↗
           </a>
           <span className="adm-topo__email">{usuario.email}</span>

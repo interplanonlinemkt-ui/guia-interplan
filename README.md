@@ -4,7 +4,7 @@ Site público do guia (rede credenciada + parceiros em destaque) e painel ADM pa
 
 - **Stack:** React + Vite, Firebase (Authentication, Firestore e, opcionalmente, Storage)
 - **Site público:** `/`
-- **Painel ADM:** `/admin`
+- **Painel ADM:** `/#/admin` (ex.: `https://seusite/#/admin`)
 
 ## Rodando no computador
 
@@ -13,7 +13,7 @@ npm install
 npm run dev
 ```
 
-Abre em `http://localhost:5173`. Sem o Firebase configurado, o site já funciona com os dados do site atual (`public/dados/rede.json`). O painel ADM só funciona depois do passo a passo abaixo.
+Abre em `http://localhost:5173`. Sem o Firebase configurado, o site já funciona com os dados do site atual (`public/dados/rede.json`). O painel fica em `http://localhost:5173/#/admin` e só funciona depois do passo a passo abaixo.
 
 ## Configurando o Firebase (uma vez só)
 
@@ -29,7 +29,7 @@ Abre em `http://localhost:5173`. Sem o Firebase configurado, o site já funciona
    firebase use --add          # escolha o projeto criado
    firebase deploy --only firestore:rules
    ```
-7. Rode `npm run dev`, acesse `/admin`, entre e clique em **Importar dados do site atual**. Pronto: a partir daí o site lê do Firebase.
+7. Rode `npm run dev`, acesse `/#/admin`, entre e clique em **Importar dados do site atual**. Pronto: a partir daí o site lê do Firebase.
 
 ### Imagens dos anúncios (Storage)
 
@@ -52,7 +52,13 @@ O upload de imagens pelo painel usa o **Firebase Storage**, que hoje exige o pla
 npm run build
 ```
 
-Gera a pasta `dist/`. Para publicar:
+Gera a pasta `dist/`. O build usa caminhos relativos, então funciona na raiz de um domínio ou numa subpasta. Para publicar:
+
+- **GitHub Pages** (repositório público):
+  ```bash
+  npm run deploy
+  ```
+  Esse comando gera o build e envia a pasta `dist` para a branch `gh-pages`. Na primeira vez, em **Settings → Pages** do repositório, escolha *Deploy from a branch* → branch **`gh-pages`** → pasta **`/ (root)`**. O site fica em `https://SEU-USUARIO.github.io/NOME-DO-REPO/`. As chaves do `.env` entram no build feito no seu computador; o `.env` em si não vai para o GitHub.
 
 - **Firebase Hosting:** `firebase deploy --only hosting` (já configurado em `firebase.json`).
 - **Netlify:** conecte o repositório do GitHub, com comando de build `npm run build` e pasta `dist`. As variáveis do `.env` vão em *Site settings → Environment variables*. O arquivo `public/_redirects` já cuida das rotas.

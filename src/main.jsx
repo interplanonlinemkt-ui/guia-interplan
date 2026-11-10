@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import Guia from './Guia';
 import './styles/base.css';
 
@@ -8,7 +8,8 @@ const Admin = lazy(() => import('./admin/Admin'));
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter>
+    {/* HashRouter: o painel fica em /#/admin e funciona em qualquer hospedagem, inclusive GitHub Pages */}
+    <HashRouter>
       <Routes>
         <Route path="/" element={<Guia />} />
         <Route
@@ -21,6 +22,6 @@ createRoot(document.getElementById('root')).render(
         />
         <Route path="*" element={<Guia />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   </React.StrictMode>
 );

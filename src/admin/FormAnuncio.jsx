@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Modal from '../components/Modal';
 import { digitos } from '../lib/texto';
+import { publico } from '../lib/url';
 import { enviarImagem, novoId, storageDisponivel } from './servico';
 
 const linhas = (txt) => txt.split('\n').map((s) => s.trim()).filter(Boolean);
@@ -89,7 +90,7 @@ export default function FormAnuncio({ inicial, dados, onFechar, onSalvar }) {
     }
   };
 
-  const imagemAtual = previa || f.imagemUrl;
+  const imagemAtual = previa || publico(f.imagemUrl);
 
   return (
     <Modal titulo={inicial ? 'Editar anúncio' : 'Novo anúncio'} onFechar={onFechar} largura={900}>

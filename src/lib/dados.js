@@ -1,4 +1,5 @@
 import { app, firebaseAtivo } from './firebase';
+import { publico } from './url';
 
 /**
  * O site público lê UM documento só (publicacao/atual), que o painel ADM
@@ -17,7 +18,7 @@ export async function carregarGuia() {
       console.warn('[guia] Falha ao ler o Firebase, usando dados locais.', e);
     }
   }
-  const r = await fetch('/dados/rede.json');
+  const r = await fetch(publico('/dados/rede.json'));
   return limpar(await r.json());
 }
 
