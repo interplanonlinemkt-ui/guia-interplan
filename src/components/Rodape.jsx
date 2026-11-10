@@ -1,14 +1,14 @@
 import logoBranco from '../assets/logo-branco.svg';
 import instagram from '../assets/rede-instagram.svg';
 import facebook from '../assets/rede-facebook.svg';
-import youtube from '../assets/rede-youtube.svg';
+import tiktok from '../assets/rede-tiktok.svg';
 import { CONTATO, REDES, AVISO_RODAPE } from '../config';
 import { formatarTelefone, linkTelefone } from '../lib/texto';
 
 const redes = [
   ['instagram', 'Instagram', instagram],
   ['facebook', 'Facebook', facebook],
-  ['youtube', 'YouTube', youtube],
+  ['tiktok', 'TikTok', tiktok],
 ];
 
 export default function Rodape() {

@@ -99,7 +99,7 @@ export default function Guia() {
 
   const baixarPdf = async () => {
     const { gerarPdf } = await import('./lib/pdf');
-    gerarPdf(filtrados, { busca, cidade, especialidade });
+    await gerarPdf(filtrados, { busca, cidade, especialidade });
   };
 
   const destaques = useMemo(

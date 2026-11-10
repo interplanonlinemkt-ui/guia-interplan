@@ -9,9 +9,9 @@ export const CONTATO = {
 
 // Links das redes sociais do rodapé. Deixe vazio ('') para esconder o ícone.
 export const REDES = {
-  instagram: '',
-  facebook: '',
-  youtube: '',
+  instagram: 'https://www.instagram.com/interplanonline/',
+  facebook: 'https://www.facebook.com/interplanonline/',
+  tiktok: 'https://www.tiktok.com/@interplan.prudente/',
 };
 
 export const POR_PAGINA = 12; // 3 linhas de 4 cards, como no layout
