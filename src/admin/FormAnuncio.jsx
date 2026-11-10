@@ -152,7 +152,7 @@ export default function FormAnuncio({ inicial, dados, onFechar, onSalvar }) {
             <textarea value={f._enderecos} onChange={set('_enderecos')} rows={3} />
           </label>
         </div>
-        <div className="adm-grade3">
+        <div className="adm-grade2">
           <label className="adm-campo">
             <span>Instagram</span>
             <input value={f.instagram} onChange={set('instagram')} placeholder="@perfil" />
@@ -160,10 +160,6 @@ export default function FormAnuncio({ inicial, dados, onFechar, onSalvar }) {
           <label className="adm-campo">
             <span>Site</span>
             <input value={f.site} onChange={set('site')} placeholder="www.exemplo.com.br" />
-          </label>
-          <label className="adm-campo">
-            <span>Ordem no carrossel</span>
-            <input type="number" value={f.ordem} onChange={set('ordem')} min="0" />
           </label>
         </div>
         <label className="adm-campo">

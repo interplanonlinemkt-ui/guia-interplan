@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { signOut } from 'firebase/auth';
 import { auth } from './fb';
-import { carregarTudo, salvar, excluir, publicar, importarIniciais } from './servico';
+import { carregarTudo, salvar, excluir, publicar, importarIniciais, salvarOrdem } from './servico';
 import ListaPrestadores from './ListaPrestadores';
 import ListaAnuncios from './ListaAnuncios';
 import logo from '../assets/logo.svg';
@@ -46,6 +46,20 @@ export default function Painel({ usuario }) {
       avisar('ok', acao === 'excluir' ? 'Excluído e site atualizado.' : 'Salvo e site atualizado.');
     } catch (e) {
       avisar('erro', 'Salvo, mas o site não foi atualizado: ' + e.message);
+    }
+  };
+
+  /** Recebe os anúncios já na nova ordem (arrastar e soltar) */
+  const reordenar = async (lista) => {
+    const comOrdem = lista.map((a, i) => ({ ...a, ordem: i }));
+    await salvarOrdem(comOrdem);
+    const proximo = { ...dados, anuncios: comOrdem };
+    setDados(proximo);
+    try {
+      await publicar(proximo);
+      avisar('ok', 'Ordem salva e site atualizado.');
+    } catch (e) {
+      avisar('erro', 'Ordem salva, mas o site não foi atualizado: ' + e.message);
     }
   };
 
@@ -143,7 +157,11 @@ export default function Painel({ usuario }) {
             {aba === 'prestadores' ? (
               <ListaPrestadores dados={dados} onAlterar={(item, acao) => alterar('prestadores', item, acao)} />
             ) : (
-              <ListaAnuncios dados={dados} onAlterar={(item, acao) => alterar('anuncios', item, acao)} />
+              <ListaAnuncios
+                dados={dados}
+                onAlterar={(item, acao) => alterar('anuncios', item, acao)}
+                onReordenar={reordenar}
+              />
             )}
           </>
         )}

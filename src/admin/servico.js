@@ -35,6 +35,13 @@ export async function salvar(colecao, item) {
   await setDoc(doc(db, colecao, id), { ...dados, atualizadoEm: serverTimestamp(), atualizadoPor: quem() });
 }
 
+/** Grava a nova ordem dos anúncios (0, 1, 2…) de uma vez só */
+export async function salvarOrdem(anuncios) {
+  const lote = writeBatch(db);
+  anuncios.forEach((a, i) => lote.set(doc(db, 'anuncios', a.id), { ordem: i }, { merge: true }));
+  await lote.commit();
+}
+
 export async function excluir(colecao, id) {
   await deleteDoc(doc(db, colecao, id));
 }
